@@ -26,7 +26,7 @@ const props = defineProps({
 });
 
 const storyHost = computed(() => {
-  return props.story.url.split("//")[1].split("/")[0];
+  return props.story.url?.split("//")[1].split("/")[0] || "";
 });
 </script>
 
