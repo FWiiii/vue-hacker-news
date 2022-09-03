@@ -20,10 +20,10 @@ export const newsStore = defineStore("news", {
     changePage(n) {
       this.page = n;
     },
-    async getStory() {
-      const response = await fetch(`/api/hn/feeds?feed=news&page=${this.page}`);
+    async getStory(n=this.page) {
+      const response = await fetch(`/api/hn/feeds?feed=news&page=${n}`);
       this.stories = await response.json();
-      this.mapStories[this.page] = this.stories;
+      this.mapStories[n] = this.stories;
     }
   }
 });

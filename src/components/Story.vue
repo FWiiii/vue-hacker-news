@@ -10,7 +10,9 @@
         <span class="by">by</span>
         <span class="author">{{ story.user }}</span>
         <span>|</span>
-        <span class="comments">{{ story.comments_count }} comments</span>
+        <router-link class="comments" :to="{ name: 'Comments', params: { id: story.id } }"
+          >{{ story.comments_count }} comments</router-link
+        >
       </div>
     </div>
   </div>
