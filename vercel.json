@@ -1,8 +1,8 @@
 {
     "rewrites": [
       {
-        "source": "/api/(.*)",
-        "destination": "/api/proxy"
+        "source": "/api/:path*",
+        "destination": "https://hn.nuxtjs.org/:path*"
       }
     ]
   }
