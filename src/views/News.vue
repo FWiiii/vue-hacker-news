@@ -1,14 +1,14 @@
 <template>
   <div class="news-wrapper">
     <PageSwitch />
-    <StoriesList />
+    <ItemList />
     <div class="page-switch"></div>
     <PageSwitch />
   </div>
 </template>
 
 <script setup>
-import StoriesList from "../components/StoriesList.vue";
+import ItemList from "../components/ItemList.vue";
 import PageSwitch from "../components/PageSwitch.vue";
 </script>
 

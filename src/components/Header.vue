@@ -35,10 +35,13 @@
     </div>
     <div class="center-section">
       <div class="header-links">
-        <router-link class="header-link" :to="{ path: '/top' }">Top</router-link>
+        <!-- <router-link class="header-link" :to="{ path: '/top' }">Top</router-link>
         <router-link class="header-link" :to="{ path: '/news/1' }">New</router-link>
         <router-link class="header-link" :to="{ path: '/show/1' }">Show</router-link>
-        <router-link class="header-link" :to="{ path: '/ask/1' }">Ask</router-link>
+        <router-link class="header-link" :to="{ path: '/ask/1' }">Ask</router-link> -->
+        <router-link v-for="route,index in routerList" :key="index" class="header-link" :to="{ path: route.path }">{{
+          route.name
+        }}</router-link>
       </div>
     </div>
     <div class="toggle-mode" @click="isDark = !isDark">
@@ -68,6 +71,25 @@
 </template>
 <script setup>
 import { useDark } from "@vueuse/core";
+
+const routerList = [
+  {
+    name: "Top",
+    path: "/top"
+  },
+  {
+    name: "New",
+    path: "/news/1"
+  },
+  {
+    name: "Show",
+    path: "/show/1"
+  },
+  {
+    name: "Ask",
+    path: "/ask/1"
+  }
+];
 
 const isDark = useDark();
 </script>

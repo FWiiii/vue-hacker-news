@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 export const newsStore = defineStore("news", {
   state: () => {
     return {
+      currentPart: "",
       page: 1,
       topNews: null,
       mapStories: {},
@@ -24,6 +25,9 @@ export const newsStore = defineStore("news", {
   actions: {
     changePage(n) {
       this.page = n;
+    },
+    setCurrentPart(part) {
+      this.currentPart = part;
     },
     async getStory(n = this.page) {
       const response = await fetch(`https://hn.algolia.com/api/v1/search?tags=story&page=${n}`);

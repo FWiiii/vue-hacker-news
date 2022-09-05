@@ -5,13 +5,13 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    redirect: "/news/1"
+    redirect: "/top"
   },
   {
     path: "/top",
     name: "Top",
     component: () => import("../views/Top.vue"),
-    meta:{
+    meta: {
       title: "Top"
     }
   },
@@ -19,42 +19,42 @@ const routes = [
     path: "/news/:page",
     name: "News",
     component: () => import("../views/News.vue"),
-    meta:{
+    meta: {
       title: "News"
     }
   },
   {
-    path:"/comments/:id",
-    name:"Comments",
+    path: "/comments/:id",
+    name: "Comments",
     component: () => import("../views/Comments.vue"),
-    meta:{
+    meta: {
       title: "Comments"
     }
   },
   {
-    path:"/show/:page",
-    name:"Show",
-    component: () => import("../views/Show.vue"),
-    meta:{
+    path: "/show/:page",
+    name: "Show",
+    component: () => import("../views/News.vue"),
+    meta: {
       title: "Show"
     }
   },
   {
-    path:"/ask/:page",
-    name:"Ask",
-    component: () => import("../views/Ask.vue"),
-    meta:{
+    path: "/ask/:page",
+    name: "Ask",
+    component: () => import("../views/News.vue"),
+    meta: {
       title: "Ask"
     }
   },
   {
-    path:"/user/:username",
-    name:"User",
+    path: "/user/:username",
+    name: "User",
     component: () => import("../views/User.vue"),
-    meta:{
+    meta: {
       title: "User"
     }
-  },
+  }
 ];
 
 const router = createRouter({

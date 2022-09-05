@@ -1,11 +1,11 @@
 <template>
-  <TopNews />
+  <ItemList />
   <div class="get-more" @click="getMore" v-if="n">[ More ...]</div>
 </template>
 
 <script setup>
 import { newsStore } from "../store/module/news";
-import TopNews from "../components/TopNews.vue";
+import ItemList from "../components/ItemList.vue";
 import { ref } from "vue";
 const n = ref(true)
 const useNews = newsStore();

@@ -6,9 +6,10 @@ import { storeToRefs } from "pinia";
 export function guard(router) {
   const useNews = newsStore(pinia);
   const useUser = userStore(pinia);
-  const { mapStories, mapShows, mapAsks } = storeToRefs(useNews);
+  const { mapStories, mapShows, mapAsks, currentPart } = storeToRefs(useNews);
 
   router.beforeEach((to) => {
+    to.name === currentPart || useNews.setCurrentPart(to.name);
     document.title = `${to.meta.title} | Vue HackerNews`;
     return true;
   });

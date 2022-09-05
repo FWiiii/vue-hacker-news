@@ -11,7 +11,9 @@
           <span v-html="comment.text"></span>
         </div>
         <div class="comment-footer" v-if="comment.children.length !== 0">
-          <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">[ + ] 1 reply collapsed</p>
+          <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">
+            [ + ] {{ comment.children.length }} reply collapsed
+          </p>
           <div class="toggle-buttom" v-else @click="flags[index] = !flags[index]">
             <div class="anniu">[ - ]</div>
             <div class="line"></div>
