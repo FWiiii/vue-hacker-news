@@ -8,6 +8,11 @@ const routes = [
     redirect: "/news/1"
   },
   {
+    path: "/top",
+    name: "Top",
+    component: () => import("../views/Top.vue")
+  },
+  {
     path: "/news/:page",
     name: "News",
     component: () => import("../views/News.vue")

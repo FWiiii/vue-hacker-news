@@ -1,31 +1,35 @@
 <template>
   <div class="main-content">
+    <Loading v-if="!flag" />
     <div class="new-wrapper">
-      <CommentInfo v-if="flag" :data="commentsInfo"/>
+      <CommentInfo v-if="flag" :data="commentsInfo" />
     </div>
     <div class="comments-wrapper">
       <div class="total-comments">
         <span>{{ comments.length }} Comments</span>
       </div>
+
       <Comment v-if="flag" :comments="comments" :width="740" />
     </div>
   </div>
 </template>
 
 <script setup>
-import Comment from "../components/Comment.vue";
-import CommentInfo from "../components/CommentInfo.vue";
+import Comment from "../components/comment/Comment.vue";
+import CommentInfo from "../components/comment/CommentInfo.vue";
+import Loading from "../components/Loading.vue";
 import { onBeforeMount, ref } from "vue";
 import { useRoute } from "vue-router";
+import { commentsStore } from "../store/module/comments";
+const useComments = commentsStore();
 const route = useRoute();
 const comments = ref({});
-const commentsInfo = ref({});
 const flag = ref(false);
+const commentsInfo = ref({});
 onBeforeMount(async () => {
-  const res = await fetch(`/api/hn/item?id=${route.params.id}`);
-  const data = await res.json();
-  comments.value = data.comments;
-  commentsInfo.value = data;
+  await useComments.getComments(route.params.id);
+  comments.value = useComments.comments;
+  commentsInfo.value = useComments.commentInfo;
   flag.value = true;
 });
 </script>
@@ -51,6 +55,7 @@ onBeforeMount(async () => {
     .total-comments {
       padding: 20px 0;
       border-bottom: 1px solid #eee;
+      margin-bottom: 13.5px;
     }
   }
 }

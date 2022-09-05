@@ -35,11 +35,11 @@
     </div>
     <div class="center-section">
       <div class="header-links">
-        <a class="header-link">Top</a>
-        <a class="header-link">New</a>
-        <a class="header-link">Show</a>
-        <a class="header-link">Best</a>
-        <a class="header-link">Ask</a>
+        <router-link class="header-link" :to="{ path: '/top' }">Top</router-link>
+        <router-link class="header-link" :to="{ path: '/news/1' }">New</router-link>
+        <router-link class="header-link" :to="{ path: '/top' }">Show</router-link>
+        <router-link class="header-link" :to="{ path: '/top' }">Best</router-link>
+        <router-link class="header-link" :to="{ path: '/top' }">Ask</router-link>
       </div>
     </div>
     <div class="toggle-mode" @click="isDark = !isDark">
@@ -95,7 +95,8 @@ const isDark = useDark();
       display: flex;
       flex-direction: row;
       align-items: center;
-      .header-link {
+      a {
+        text-decoration: none;
         margin-right: 50px;
         color: #fff;
         font-weight: 300;
@@ -109,7 +110,6 @@ const isDark = useDark();
     display: flex;
     align-items: center;
     justify-content: center;
-    
   }
 }
 </style>

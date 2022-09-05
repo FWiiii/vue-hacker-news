@@ -8,10 +8,12 @@
       <div class="story-footer">
         <span class="host">{{ storyHost }}</span>
         <span class="by">by</span>
-        <span class="author">{{ story.user }}</span>
+        <span class="author">{{ story.author }}</span>
         <span>|</span>
-        <router-link class="comments" :to="{ name: 'Comments', params: { id: story.id } }"
-          >{{ story.comments_count }} comments</router-link
+        <span class="time-ago">{{ timeAgo }}</span>
+        <span>|</span>
+        <router-link class="comments" :to="{ name: 'Comments', params: { id: story.objectID } }"
+          >{{ story.num_comments }} comments</router-link
         >
       </div>
     </div>
@@ -20,6 +22,8 @@
 
 <script setup>
 import { computed } from "vue";
+import { timeago } from "../utils/getTime";
+
 const props = defineProps({
   story: {
     type: Object,
@@ -29,6 +33,10 @@ const props = defineProps({
 
 const storyHost = computed(() => {
   return props.story.url?.split("//")[1].split("/")[0] || "";
+});
+
+const timeAgo = computed(() => {
+  return timeago(props.story.created_at_i * 1000);
 });
 </script>
 
@@ -70,20 +78,24 @@ const storyHost = computed(() => {
       color: #595959;
       font-size: 12px;
       .by {
-        margin-right: 4px;
+        margin-right: 5px;
       }
       .host {
-        margin-right: 4px;
+        margin-right: 5px;
         font-weight: 300;
       }
       .author {
         font-weight: 300;
         margin-right: 5px;
       }
-      .comments {
-        text-decoration: underline;
+      a {
+        text-decoration: none;
+        color: #000;
         font-weight: 300;
         margin-left: 5px;
+      }
+      .time-ago {
+        margin: 0 5px;
       }
     }
   }

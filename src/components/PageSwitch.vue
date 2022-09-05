@@ -14,7 +14,7 @@
 <script setup>
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
-import { newsStore } from "../store/news";
+import { newsStore } from "../store/module/news";
 const useNews = newsStore();
 const { page } = storeToRefs(useNews);
 const router = useRouter();
@@ -33,7 +33,6 @@ const pushByPage = (state) => {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 300;

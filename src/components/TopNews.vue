@@ -1,6 +1,6 @@
 <template>
   <div class="main-content">
-    <Story v-for="story in findStories" :key="story.id" :story="story"></Story>
+    <Story v-for="story in topNews" :key="story.id" :story="story"></Story>
   </div>
 </template>
 <script setup>
@@ -8,10 +8,10 @@ import Story from "./Story.vue";
 import { storeToRefs } from "pinia";
 import { newsStore } from "../store/module/news";
 const useNews = newsStore();
-const { findStories } = storeToRefs(useNews);
+const { topNews } = storeToRefs(useNews);
 </script>
 <style lang="scss">
-.main-content { 
+.main-content {
   display: flex;
   flex-direction: column;
   align-items: center;

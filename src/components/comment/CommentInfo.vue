@@ -4,7 +4,7 @@
     <div class="story-footer">
       <span class="host">{{storyHost}}</span>
       <span class="by">by</span>
-      <span class="author">{{data.user}}</span>
+      <span class="author">{{data.author}}</span>
       <span>|</span>
       <span class="score">{{data.points}} score</span>
     </div>
