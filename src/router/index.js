@@ -12,7 +12,9 @@ const routes = [
     name: "Top",
     component: () => import("../views/Top.vue"),
     meta: {
-      title: "Top"
+      title: "Top",
+      show: true,
+      order:1
     }
   },
   {
@@ -20,7 +22,9 @@ const routes = [
     name: "News",
     component: () => import("../views/News.vue"),
     meta: {
-      title: "News"
+      title: "News",
+      show: true,
+      order:2
     }
   },
   {
@@ -36,7 +40,9 @@ const routes = [
     name: "Show",
     component: () => import("../views/News.vue"),
     meta: {
-      title: "Show"
+      title: "Show",
+      show: true,
+      order:3
     }
   },
   {
@@ -44,7 +50,9 @@ const routes = [
     name: "Ask",
     component: () => import("../views/News.vue"),
     meta: {
-      title: "Ask"
+      title: "Ask",
+      show: true,
+      order:4
     }
   },
   {

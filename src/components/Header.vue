@@ -35,12 +35,8 @@
     </div>
     <div class="center-section">
       <div class="header-links">
-        <!-- <router-link class="header-link" :to="{ path: '/top' }">Top</router-link>
-        <router-link class="header-link" :to="{ path: '/news/1' }">New</router-link>
-        <router-link class="header-link" :to="{ path: '/show/1' }">Show</router-link>
-        <router-link class="header-link" :to="{ path: '/ask/1' }">Ask</router-link> -->
-        <router-link v-for="route,index in routerList" :key="index" class="header-link" :to="{ path: route.path }">{{
-          route.name
+        <router-link v-for="(link, index) in routerList" :key="index" class="header-link" :to="{ path: link.path }">{{
+          link.name
         }}</router-link>
       </div>
     </div>
@@ -71,25 +67,14 @@
 </template>
 <script setup>
 import { useDark } from "@vueuse/core";
+import { useRouter } from "vue-router";
 
-const routerList = [
-  {
-    name: "Top",
-    path: "/top"
-  },
-  {
-    name: "New",
-    path: "/news/1"
-  },
-  {
-    name: "Show",
-    path: "/show/1"
-  },
-  {
-    name: "Ask",
-    path: "/ask/1"
-  }
-];
+const router = useRouter();
+const routerList = router
+  .getRoutes()
+  .filter((route) => route.meta?.show)
+  .sort((a, b) => a.meta?.order - b.meta?.order)
+  .map((route) => ({ name: route.name, path: route.path.replace(":page", "1") }));
 
 const isDark = useDark();
 </script>
@@ -122,6 +107,10 @@ const isDark = useDark();
         color: #fff;
         font-weight: 300;
         font-size: 16px;
+      }
+      .router-link-active {
+        color: #eee;
+        font-weight: 700;
       }
     }
   }

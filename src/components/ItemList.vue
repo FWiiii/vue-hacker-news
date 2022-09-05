@@ -1,10 +1,10 @@
 <template>
   <div class="main-content">
-    <Story v-for="story in getData()" :key="story.id" :story="story"></Story>
+    <NewsItem v-for="story in getData()" :key="story.id" :story="story"></NewsItem>
   </div>
 </template>
 <script setup>
-import Story from "./Story.vue";
+import NewsItem from "./NewsItem.vue";
 import { storeToRefs } from "pinia";
 import { newsStore } from "../store/module/news";
 const useNews = newsStore();
