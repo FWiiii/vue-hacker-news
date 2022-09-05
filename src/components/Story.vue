@@ -6,11 +6,13 @@
     <div class="right-section">
       <a class="title" :href="story.url" target="_blank">{{ story.title }}</a>
       <div class="story-footer">
-        <span class="host">{{ storyHost }}</span>
+        <span class="host">{{ story.url?.split("//")[1].split("/")[0] }}</span>
         <span class="by">by</span>
-        <span class="author">{{ story.author }}</span>
+        <router-link class="author" :to="{ name: 'User', params: { username: story.author } }">{{
+          story.author
+        }}</router-link>
         <span>|</span>
-        <span class="time-ago">{{ timeAgo }}</span>
+        <span class="time-ago">{{ timeago(story.created_at_i * 1000) }}</span>
         <span>|</span>
         <router-link class="comments" :to="{ name: 'Comments', params: { id: story.objectID } }"
           >{{ story.num_comments }} comments</router-link
@@ -21,22 +23,13 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
 import { timeago } from "../utils/getTime";
 
-const props = defineProps({
+defineProps({
   story: {
     type: Object,
     default: () => {}
   }
-});
-
-const storyHost = computed(() => {
-  return props.story.url?.split("//")[1].split("/")[0] || "";
-});
-
-const timeAgo = computed(() => {
-  return timeago(props.story.created_at_i * 1000);
 });
 </script>
 
@@ -48,7 +41,7 @@ const timeAgo = computed(() => {
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #eee;
-
+  color: #2e495e;
   padding: 20px 30px 20px 30px;
   .left-section {
     display: flex;
@@ -59,7 +52,6 @@ const timeAgo = computed(() => {
     .score {
       font-size: 17px;
       font-weight: 400;
-      color: #2e495e;
     }
   }
   .right-section {
@@ -77,22 +69,21 @@ const timeAgo = computed(() => {
     .story-footer {
       color: #595959;
       font-size: 12px;
-      .by {
-        margin-right: 5px;
-      }
-      .host {
-        margin-right: 5px;
-        font-weight: 300;
-      }
+      margin-top: 5px;
+      .host,
       .author {
-        font-weight: 300;
         margin-right: 5px;
+        font-weight: 300;
       }
       a {
         text-decoration: none;
         color: #000;
         font-weight: 300;
         margin-left: 5px;
+        &:hover {
+          text-decoration: underline;
+          color: #2e495e;
+        }
       }
       .time-ago {
         margin: 0 5px;

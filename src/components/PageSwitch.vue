@@ -12,17 +12,18 @@
   </div>
 </template>
 <script setup>
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { newsStore } from "../store/module/news";
 const useNews = newsStore();
 const { page } = storeToRefs(useNews);
 const router = useRouter();
+const route = useRoute();
 const pushByPage = (state) => {
   if (state === "prev" && page.value > 1) {
-    router.push(`/news/${Number(page.value) - 1}`);
+    router.push({ name: route.name, params: { page: Number(page.value) - 1 } });
   } else if (state === "next" && page.value < 10) {
-    router.push(`/news/${Number(page.value) + 1}`);
+    router.push({ name: route.name, params: { page: Number(page.value) + 1 } });
   }
 };
 </script>

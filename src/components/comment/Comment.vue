@@ -1,19 +1,23 @@
 <template>
   <div class="main">
     <div class="comment-content" v-for="(comment, index) in comments" :key="index" :style="{ width: width + 'px' }">
-      <span class="user">{{ comment.author }}</span>
-      <span>|</span>
-      <span class="time-ago">{{timeAgo(comment)}}</span>
-      <div class="comment">
-        <span v-html="comment.text"></span>
-      </div>
-      <div class="comment-footer" v-if="comment.children.length !== 0">
-        <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">[+] 1 reply collapsed</p>
-        <div class="toggle-buttom" v-if="!flags[index]" @click="flags[index] = !flags[index]"></div>
-      </div>
-      <div class="div-toggle" v-if="flags[index] || comment.children.length == 0"></div>
-      <div class="comment-children" v-show="!flags[index]">
-        <Comment v-if="comment.children" :comments="comment.children" :width="width - 22.5" />
+      <div class="commeng-main" v-if="comment.author">
+        <router-link class="user" :to="{ name: 'User', params: { username: comment.author } }">{{
+          comment.author
+        }}</router-link>
+        <span>|</span>
+        <span class="time-ago">{{ timeago(comment.created_at_i * 1000) }}</span>
+        <div class="comment">
+          <span v-html="comment.text"></span>
+        </div>
+        <div class="comment-footer" v-if="comment.children.length !== 0">
+          <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">[+] 1 reply collapsed</p>
+          <div class="toggle-buttom" v-if="!flags[index]" @click="flags[index] = !flags[index]"></div>
+        </div>
+        <div class="div-toggle" v-if="flags[index] || comment.children.length == 0"></div>
+        <div class="comment-children" v-show="!flags[index]">
+          <Comment v-if="comment.children" :comments="comment.children" :width="width - 22.5" />
+        </div>
       </div>
     </div>
   </div>
@@ -35,10 +39,6 @@ const props = defineProps({
 });
 
 const flags = ref(Array.from({ length: props.comments.length }, () => true));
-
-const timeAgo = (comment) => {
-  return timeago(comment.created_at_i * 1000);
-};
 </script>
 
 <style lang="scss">
@@ -52,7 +52,7 @@ const timeAgo = (comment) => {
   font-size: 13px;
   font-weight: 300;
   float: right;
-  .user{
+  .user {
     font-size: 16px;
     font-weight: 500;
     color: #000;
@@ -103,7 +103,7 @@ const timeAgo = (comment) => {
       left: -2px;
     }
   }
-  .div-toggle{
+  .div-toggle {
     margin-bottom: 13.5px;
   }
 }

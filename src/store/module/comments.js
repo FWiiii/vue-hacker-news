@@ -7,11 +7,7 @@ export const commentsStore = defineStore("comments", {
       commentInfo: null
     };
   },
-  getters: {},
   actions: {
-    changePage(n) {
-      this.page = n;
-    },
     async getComments(id) {
       const res = await fetch(`https://hn.algolia.com/api/v1/items/${id}`);
       const data = await res.json();

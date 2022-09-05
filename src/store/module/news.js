@@ -1,20 +1,24 @@
 import { defineStore } from "pinia";
 
-// useStore 可以是 useUser、useCart 之类的任何东西
-// 第一个参数是应用程序中 store 的唯一 id
 export const newsStore = defineStore("news", {
   state: () => {
     return {
-      // 所有这些属性都将自动推断其类型
       page: 1,
-      stories: null,
       topNews: null,
-      mapStories: {}
+      mapStories: {},
+      mapShows: {},
+      mapAsks:{}
     };
   },
   getters: {
-    findStories() {
+    currentStories() {
       return this.mapStories[this.page];
+    },
+    currentShows() {
+      return this.mapShows[this.page];
+    },
+    currentAsks() {
+      return this.mapAsks[this.page];
     }
   },
   actions: {
@@ -23,9 +27,8 @@ export const newsStore = defineStore("news", {
     },
     async getStory(n = this.page) {
       const response = await fetch(`https://hn.algolia.com/api/v1/search?tags=story&page=${n}`);
-      this.resJson = await response.json();
-      this.stories = this.resJson.hits;
-      this.mapStories[n] = this.stories;
+      const data = await response.json();
+      this.mapStories[n] = data.hits;
     },
     async getTopNews(n = 0) {
       const response = await fetch(`https://hn.algolia.com/api/v1/search?tags=front_page&page=${n}`);
@@ -36,6 +39,16 @@ export const newsStore = defineStore("news", {
       } else {
         this.topNews = this.resJson.hits;
       }
+    },
+    async getShows(n = this.page) {
+      const response = await fetch(`https://hn.algolia.com/api/v1/search_by_date?tags=show_hn&page=${n}`);
+      const data = await response.json();
+      this.mapShows[n] = data.hits;
+    },
+    async getAsks(n = this.page) {
+      const response = await fetch(`https://hn.algolia.com/api/v1/search_by_date?tags=ask_hn&page=${n}`);
+      const data = await response.json();
+      this.mapAsks[n] = data.hits;
     }
   }
 });

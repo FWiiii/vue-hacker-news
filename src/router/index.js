@@ -10,18 +10,51 @@ const routes = [
   {
     path: "/top",
     name: "Top",
-    component: () => import("../views/Top.vue")
+    component: () => import("../views/Top.vue"),
+    meta:{
+      title: "Top"
+    }
   },
   {
     path: "/news/:page",
     name: "News",
-    component: () => import("../views/News.vue")
+    component: () => import("../views/News.vue"),
+    meta:{
+      title: "News"
+    }
   },
   {
     path:"/comments/:id",
     name:"Comments",
-    component: () => import("../views/Comments.vue")
-  }
+    component: () => import("../views/Comments.vue"),
+    meta:{
+      title: "Comments"
+    }
+  },
+  {
+    path:"/show/:page",
+    name:"Show",
+    component: () => import("../views/Show.vue"),
+    meta:{
+      title: "Show"
+    }
+  },
+  {
+    path:"/ask/:page",
+    name:"Ask",
+    component: () => import("../views/Ask.vue"),
+    meta:{
+      title: "Ask"
+    }
+  },
+  {
+    path:"/user/:username",
+    name:"User",
+    component: () => import("../views/User.vue"),
+    meta:{
+      title: "User"
+    }
+  },
 ];
 
 const router = createRouter({

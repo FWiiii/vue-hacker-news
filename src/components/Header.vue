@@ -37,9 +37,8 @@
       <div class="header-links">
         <router-link class="header-link" :to="{ path: '/top' }">Top</router-link>
         <router-link class="header-link" :to="{ path: '/news/1' }">New</router-link>
-        <router-link class="header-link" :to="{ path: '/top' }">Show</router-link>
-        <router-link class="header-link" :to="{ path: '/top' }">Best</router-link>
-        <router-link class="header-link" :to="{ path: '/top' }">Ask</router-link>
+        <router-link class="header-link" :to="{ path: '/show/1' }">Show</router-link>
+        <router-link class="header-link" :to="{ path: '/ask/1' }">Ask</router-link>
       </div>
     </div>
     <div class="toggle-mode" @click="isDark = !isDark">
