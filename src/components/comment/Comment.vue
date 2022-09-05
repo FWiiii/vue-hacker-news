@@ -11,8 +11,11 @@
           <span v-html="comment.text"></span>
         </div>
         <div class="comment-footer" v-if="comment.children.length !== 0">
-          <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">[+] 1 reply collapsed</p>
-          <div class="toggle-buttom" v-if="!flags[index]" @click="flags[index] = !flags[index]"></div>
+          <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">[ + ] 1 reply collapsed</p>
+          <div class="toggle-buttom" v-else @click="flags[index] = !flags[index]">
+            <div class="anniu">[ - ]</div>
+            <div class="line"></div>
+          </div>
         </div>
         <div class="div-toggle" v-if="flags[index] || comment.children.length == 0"></div>
         <div class="comment-children" v-show="!flags[index]">
@@ -69,38 +72,22 @@ const flags = ref(Array.from({ length: props.comments.length }, () => true));
     margin: 13.5px 0;
   }
   .comment-footer {
-    background-color: #fffbf2;
     cursor: pointer;
+    .collapsed {
+      background-color: #fffbf2;
+    }
   }
   .div-toggle {
     height: 1px;
     background-color: #eee;
   }
   .toggle-buttom {
-    height: 1px;
-    background-color: #eee;
-    &::before {
-      content: "";
-      display: block;
-      width: 10px;
-      height: 10px;
-      border: 1px solid #000;
-      border-radius: 3px;
-      background-color: #eee;
-      position: relative;
-      top: -5px;
-      left: -5px;
-    }
-    &::after {
-      // 加号的横线
-      content: "";
-      display: block;
-      width: 6px;
-      background-color: #fff;
-      border-bottom: 1px solid #000;
-      position: relative;
-      top: -12px;
-      left: -2px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    .line {
+      width: 97%;
+      border-bottom: 1px solid #eee;
     }
   }
   .div-toggle {

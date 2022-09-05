@@ -36,6 +36,7 @@ const storyHost = computed(() => {
     font-weight: 600;
     color: #2e495e;
     text-decoration: none;
+    margin-bottom: 5px;
   }
   .story-footer {
     font-size: 14px;
