@@ -1,16 +1,17 @@
 <template>
   <div class="main-content">
     <Loading v-if="!flag" />
-    <div class="new-wrapper">
-      <CommentInfo v-if="flag" :data="commentsInfo" />
-    </div>
-    <div class="comments-wrapper">
-      <div class="total-comments">
-        <span>{{ comments.length }} Comments</span>
+    <template v-else>
+      <div class="new-wrapper">
+        <CommentInfo :data="commentsInfo" />
       </div>
-
-      <Comment v-if="flag" :comments="comments" :width="740" />
-    </div>
+      <div class="comments-wrapper">
+        <div class="total-comments">
+          <span>{{ comments.length }} Comments</span>
+        </div>
+        <Comment :comments="comments" :width="740" />
+      </div>
+    </template>
   </div>
 </template>
 

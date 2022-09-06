@@ -108,10 +108,6 @@ const isDark = useDark();
         font-weight: 300;
         font-size: 16px;
       }
-      .router-link-active {
-        color: #eee;
-        font-weight: 700;
-      }
     }
   }
   .toggle-mode {
