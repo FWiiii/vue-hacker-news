@@ -1,29 +1,30 @@
 <template>
   <div class="main">
     <div class="comment-content" v-for="(comment, index) in comments" :key="index" :style="{ width: width + 'px' }">
-      <div class="commeng-main" v-if="comment.author">
-        <router-link class="user" :to="{ name: 'User', params: { username: comment.author } }">{{
-          comment.author
-        }}</router-link>
-        <span>|</span>
-        <span class="time-ago">{{ timeago(comment.created_at_i * 1000) }}</span>
-        <div class="comment">
-          <span v-html="comment.text"></span>
-        </div>
-        <div class="comment-footer" v-if="comment.children.length !== 0">
-          <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">
-            [ + ] {{ comment.children.length }} reply collapsed
-          </p>
-          <div class="toggle-buttom" v-else @click="flags[index] = !flags[index]">
-            <div class="anniu">[ - ]</div>
-            <div class="line"></div>
+      <template v-if="comment.text"
+        ><div class="commeng-main">
+          <router-link class="user" :to="{ name: 'User', params: { username: comment.author } }">{{
+            comment.author
+          }}</router-link>
+          <span>|</span>
+          <span class="time-ago">{{ timeago(comment.created_at_i * 1000) }}</span>
+          <div class="comment">
+            <span v-html="comment.text"></span>
           </div>
-        </div>
-        <div class="div-toggle" v-if="flags[index] || comment.children.length == 0"></div>
-        <div class="comment-children" v-show="!flags[index]">
-          <Comment v-if="comment.children" :comments="comment.children" :width="width - 22.5" />
-        </div>
-      </div>
+          <div class="comment-footer" v-if="comment.children.length !== 0">
+            <p class="collapsed" v-if="flags[index]" @click="flags[index] = !flags[index]">
+              [ + ] {{ comment.children.length }} reply collapsed
+            </p>
+            <div class="toggle-buttom" v-else @click="flags[index] = !flags[index]">
+              <div class="anniu">[ - ]</div>
+              <div class="line"></div>
+            </div>
+          </div>
+          <div class="div-toggle" v-if="flags[index] || comment.children.length == 0"></div>
+          <div class="comment-children" v-show="!flags[index]">
+            <Comment v-if="comment.children" :comments="comment.children" :width="width - 22.5" />
+          </div></div
+      ></template>
     </div>
   </div>
 </template>
@@ -82,6 +83,7 @@ const flags = ref(Array.from({ length: props.comments.length }, () => true));
   .div-toggle {
     height: 1px;
     background-color: #eee;
+    margin-bottom: 13.5px;
   }
   .toggle-buttom {
     padding-bottom: 5px;
@@ -91,9 +93,6 @@ const flags = ref(Array.from({ length: props.comments.length }, () => true));
       width: 97%;
       border-bottom: 1px solid #eee;
     }
-  }
-  .div-toggle {
-    margin-bottom: 13.5px;
   }
 }
 </style>

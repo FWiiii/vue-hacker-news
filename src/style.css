@@ -4,8 +4,18 @@ html {
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow-y: overlay;
+  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-* {
-  transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #4b5563;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
 }

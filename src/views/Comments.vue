@@ -21,11 +21,13 @@ import Loading from "../components/Loading.vue";
 import { onBeforeMount, ref } from "vue";
 import { useRoute } from "vue-router";
 import { commentsStore } from "../store/module/comments";
+
 const useComments = commentsStore();
 const route = useRoute();
 const comments = ref({});
 const flag = ref(false);
 const commentsInfo = ref({});
+
 onBeforeMount(async () => {
   await useComments.getComments(route.params.id);
   comments.value = useComments.comments;
